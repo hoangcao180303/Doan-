@@ -21,7 +21,7 @@ const ProductSuggestions = ({ productId, handleGetProductDetails }) => {
   useEffect(() => {
     const fetchSuggestions = async () => {
       console.log("Fetching suggestions for Product ID:", productId);
-      const response = await axios.get(`http://localhost:5555/api?_id=${productId}`);
+      const response = await axios.get(`http://localhost:5556/api?_id=${productId}`);
       setSuggestions(response.data["Sản phẩm gợi ý"]); 
     };
 

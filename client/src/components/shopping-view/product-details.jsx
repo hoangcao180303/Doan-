@@ -273,9 +273,9 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
           </div>
         </div>
         </div>
-        {/* <ProductSuggestions 
-          productId={productDetails?._id}  */}
-        {/* /> */}
+        <ProductSuggestions 
+          productId={productDetails?._id}
+        />
       </DialogContent>
     </Dialog>
   );

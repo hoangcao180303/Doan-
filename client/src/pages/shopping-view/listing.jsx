@@ -51,14 +51,23 @@ function ShoppingListing() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
   const { toast } = useToast();
+  const [displayProducts, setDisplayProducts] = useState([]);
 
   const categorySearchParam = searchParams.get("category");
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8; // Số sản phẩm mỗi trang
 
-  const totalPages = Math.ceil(productList.length / itemsPerPage);
-  const currentProducts = productList.slice(
+  // Random sản phẩm khi component mount hoặc khi productList thay đổi
+  useEffect(() => {
+    if (productList.length > 0) {
+      const shuffled = [...productList].sort(() => Math.random() - 0.5);
+      setDisplayProducts(shuffled);
+    }
+  }, [productList]);
+
+  const totalPages = Math.ceil(displayProducts.length / itemsPerPage);
+  const currentProducts = displayProducts.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -170,7 +179,7 @@ function ShoppingListing() {
           <h2 className="text-lg font-extrabold">All Products</h2>
           <div className="flex items-center gap-3">
             <span className="text-muted-foreground">
-              {productList?.length} Products
+              {displayProducts?.length} Products
             </span>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
